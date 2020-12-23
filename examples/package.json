@@ -6,10 +6,11 @@
     "build": "vite build"
   },
   "dependencies": {
-    "vue": "^3.0.4"
+    "vue": "^3.0.4",
+    "vue3-dropzone": "^0.0.2"
   },
   "devDependencies": {
-    "vite": "^1.0.0-rc.13",
-    "@vue/compiler-sfc": "^3.0.4"
+    "@vue/compiler-sfc": "^3.0.4",
+    "vite": "^1.0.0-rc.13"
   }
 }
