@@ -1,5 +1,5 @@
 {
-  "name": "vue-dropzone",
+  "name": "vue3-dropzone",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.common.js",
@@ -47,5 +47,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "np": {
+    "yarn": false,
+    "contents": "dist"
+  }
 }

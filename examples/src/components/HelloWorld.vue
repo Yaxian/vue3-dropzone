@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import { useDropzone } from 'vue-dropzone'
+import { useDropzone } from 'vue3-dropzone'
 export default defineComponent({
   name: 'HelloWorld',
   props: {
