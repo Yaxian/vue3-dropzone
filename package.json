@@ -1,6 +1,6 @@
 {
   "name": "vue3-dropzone",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.common.js",
   "unpkg": "dist/index.umd.js",
@@ -9,7 +9,8 @@
     "build": "npm run build:cjs && npm run build:umd",
     "build:cjs": "BUILD_FORMAT=cjs rollup --config rollup.config.js",
     "build:umd": "BUILD_FORMAT=umd rollup --config rollup.config.js",
-    "test": "jest"
+    "test": "jest",
+    "release": "np"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "jest": "^26.6.3",
     "jest-serializer-vue": "^2.0.2",
     "jest-watch-typeahead": "^0.6.1",
+    "np": "^7.0.0",
     "rollup": "^2.35.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.29.0",
@@ -47,9 +49,5 @@
   },
   "files": [
     "dist"
-  ],
-  "np": {
-    "yarn": false,
-    "contents": "dist"
-  }
+  ]
 }
