@@ -196,17 +196,6 @@ const defaultProps: Partial<FileUploadOptions> = {
   noDragEventsBubbling: false,
 }
 
-const initialState: UserFileUploadInitState = {
-  isFocused: false,
-  isFileDialogActive: false,
-  isDragActive: false,
-  isDragAccept: false,
-  isDragReject: false,
-  draggedFiles: [],
-  acceptedFiles: [],
-  fileRejections: [],
-}
-
 function reducer(state: UserFileUploadInitState, action: any) {
   /* istanbul ignore next */
   switch (action.type) {
@@ -271,7 +260,16 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   const rootRef = ref<HTMLDivElement>()
   const inputRef = ref<HTMLInputElement>()
 
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, {
+    isFocused: false,
+    isFileDialogActive: false,
+    isDragActive: false,
+    isDragAccept: false,
+    isDragReject: false,
+    draggedFiles: [],
+    acceptedFiles: [],
+    fileRejections: [],
+  })
   const openFileDialog = () => {
     if (inputRef.value) {
       dispatch({ type: 'openDialog' })
