@@ -9,7 +9,6 @@
       </div>
     </div>
     <button @click="onClick">open</button>
-    <button @click="toggleMulti">multiple = {{ options.multiple }}</button>
   </div>
 </template>
 
@@ -33,7 +32,7 @@ export default defineComponent({
   },
   setup() {
     function onDrop(acceptedFiles, rejectReasons) {
-      console.log('acceptedFiles---->', acceptedFiles)
+      console.log('acceptedFiles', acceptedFiles)
       console.log('rejectReasons', rejectReasons)
     }
 

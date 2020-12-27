@@ -298,7 +298,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   }
 
   function onKeyDownCb(event: Event & { keyCode: number }) {
-    if (!rootRef.value || !rootRef.value.$el.isEqualNode(event.target as Node)) {
+    if (!rootRef.value || !rootRef.value.isEqualNode(event.target as Node)) {
       return
     }
 
@@ -330,7 +330,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
 
   const dragTargetsRef = ref<any>([])
   const onDocumentDrop = (event: Event) => {
-    if (rootRef.value && rootRef.value.$el.contains(event.target as Node)) {
+    if (rootRef.value && rootRef.value.contains(event.target as Node)) {
       // If we intercepted an event for our instance,
       // let it propagate down to the instance's onDrop handler
       return
@@ -423,7 +423,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
 
     // Only deactivate once the dropzone and all children have been left
     const targets = dragTargetsRef.value.filter(
-      (target: EventTarget) => rootRef.value && rootRef.value.$el.contains(target as Node),
+      (target: EventTarget) => rootRef.value && rootRef.value.contains(target as Node),
     )
     // Make sure to remove a target present multiple times only once
     // (Firefox may fire dragenter/dragleave multiple times on the same element)
