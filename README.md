@@ -1,5 +1,5 @@
 
-## vue-dropzone
+## vue3-dropzone
 
 It's inspired by [react-dropzone](https://github.com/react-dropzone/react-dropzone) and implemented with vue3.
 
@@ -21,7 +21,7 @@ yarn dev
       <p v-if="isDragActive">Drop the files here ...</p>
       <p v-else>Drag 'n' drop some files here, or click to select files</p>
     </div>
-    <button @click="onClick">open</button>
+    <button @click="open">open</button>
   </div>
 </template>
 

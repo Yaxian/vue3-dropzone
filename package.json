@@ -14,15 +14,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yaxian/vue-dropzone.git"
+    "url": "git+https://github.com/Yaxian/vue3-dropzone.git"
   },
-  "keywords": [],
+  "keywords": [
+    "vue3",
+    "dropzone",
+    "file-upload",
+    "vue3-dropzone"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Yaxian/vue-dropzone/issues"
+    "url": "https://github.com/Yaxian/vue3-dropzone/issues"
   },
-  "homepage": "https://github.com/Yaxian/vue-dropzone#readme",
+  "homepage": "https://github.com/Yaxian/vue3-dropzone#readme",
   "peerDependencies": {
     "vue": ">=3"
   },
