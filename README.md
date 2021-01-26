@@ -30,11 +30,13 @@ import { useDropzone } from 'vue3-dropzone'
 export default {
   name: 'UseDropzoneDemo',
   setup() {
-    const {
-      getRootProps,
-      getInputProps,
-      ...rest
-    } = useDropzone(options)
+    function onDrop(acceptFiles, rejectReasons) {
+      console.log(acceptFiles)
+      console.log(rejectReasons)
+    }
+
+    const { getRootProps, getInputProps, ...rest } = useDropzone({ onDrop })
+
     return {
       getRootProps,
       getInputProps,
