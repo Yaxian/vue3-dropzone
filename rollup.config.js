@@ -24,6 +24,10 @@ export default {
     typescript({
       tsconfig: 'tsconfig.build.json',
     }),
-    terser(),
+    terser({
+      format: {
+        comments: false,
+      },
+    }),
   ],
 };
