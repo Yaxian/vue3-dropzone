@@ -145,9 +145,9 @@ describe('useFileUpload() hook', () => {
         onKeyDown: jest.fn(),
         onFocus: jest.fn(),
         onBlur: jest.fn(),
-        onDragEnter: jest.fn(),
-        onDragOver: jest.fn(),
-        onDragLeave: jest.fn(),
+        onDragenter: jest.fn(),
+        onDragover: jest.fn(),
+        onDragleave: jest.fn(),
         onDrop: jest.fn(),
       }
 
@@ -171,13 +171,13 @@ describe('useFileUpload() hook', () => {
 
       fireEvent.dragEnter(dropzone, event)
       await flushPromises(rerender, TestCmp)
-      expect(rootProps.onDragEnter).toHaveBeenCalled()
+      expect(rootProps.onDragenter).toHaveBeenCalled()
 
       fireEvent.dragOver(dropzone, event)
-      expect(rootProps.onDragOver).toHaveBeenCalled()
+      expect(rootProps.onDragover).toHaveBeenCalled()
 
       fireEvent.dragLeave(dropzone, event)
-      expect(rootProps.onDragLeave).toHaveBeenCalled()
+      expect(rootProps.onDragleave).toHaveBeenCalled()
 
       fireEvent.drop(dropzone, event)
       await flushPromises(rerender, TestCmp)
@@ -213,9 +213,9 @@ describe('useFileUpload() hook', () => {
         onKeyDown: jest.fn(),
         onFocus: jest.fn(),
         onBlur: jest.fn(),
-        onDragEnter: jest.fn(),
-        onDragOver: jest.fn(),
-        onDragLeave: jest.fn(),
+        onDragenter: jest.fn(),
+        onDragover: jest.fn(),
+        onDragleave: jest.fn(),
         onDrop: jest.fn(),
       }
 
@@ -245,13 +245,13 @@ describe('useFileUpload() hook', () => {
       expect(rootProps.onBlur).not.toHaveBeenCalled()
 
       fireEvent.dragEnter(dropzone, event)
-      expect(rootProps.onDragEnter).not.toHaveBeenCalled()
+      expect(rootProps.onDragenter).not.toHaveBeenCalled()
 
       fireEvent.dragOver(dropzone, event)
-      expect(rootProps.onDragOver).not.toHaveBeenCalled()
+      expect(rootProps.onDragover).not.toHaveBeenCalled()
 
       fireEvent.dragLeave(dropzone, event)
-      expect(rootProps.onDragLeave).not.toHaveBeenCalled()
+      expect(rootProps.onDragleave).not.toHaveBeenCalled()
 
       fireEvent.drop(dropzone, event)
       expect(rootProps.onDrop).not.toHaveBeenCalled()
