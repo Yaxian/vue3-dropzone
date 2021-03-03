@@ -7,6 +7,9 @@
       <div v-if="isFocused" id="focus">
         focused
       </div>
+      <div v-if="isDragReject" id="isDragReject">
+        isDragReject: {{ isDragReject }}
+      </div>
     </div>
     <button @click="onClick">open</button>
   </div>
@@ -14,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import { useDropzone } from 'vue3-dropzone'
+import { useDropzone } from 'vue3-dropzone/src'
 export default defineComponent({
   name: 'HelloWorld',
   props: {
@@ -37,7 +40,7 @@ export default defineComponent({
     }
 
     const options = reactive({
-      multiple: true,
+      multiple: false,
       onDrop,
       accept: '.jpg',
     })

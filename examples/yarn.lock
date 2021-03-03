@@ -428,10 +428,8 @@ vite@^2.0.4:
   optionalDependencies:
     fsevents "~2.3.1"
 
-vue3-dropzone@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/vue3-dropzone/-/vue3-dropzone-0.0.4.tgz#7f04759267c9a7634d1797cc3c67dac1e74ba145"
-  integrity sha512-UQBAJdzfa0sW/SEn4wQsIsCLXw7ED6YnjcdCp+PrZxgYingKnImF/FtUP5TQi9jkCscQRyzqo6YArCYjzTRfiA==
+"vue3-dropzone@file:..":
+  version "0.0.5"
   dependencies:
     attr-accept "^2.2.2"
     file-selector "^0.2.4"

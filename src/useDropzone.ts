@@ -538,12 +538,13 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     onFocus,
     onBlur,
     onClick,
-    /* eslint-disable no-shadow */
     onDragEnter,
+    onDragenter,
     onDragOver,
+    onDragover,
     onDragLeave,
+    onDragleave,
     onDrop,
-    /* eslint-enable no-shadow */
     ...rest
   }: {
     [key: string] : any
@@ -552,9 +553,9 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     onFocus: composeKeyboardHandler(composeEventHandlers(onFocus, onFocusCb)),
     onBlur: composeKeyboardHandler(composeEventHandlers(onBlur, onBlurCb)),
     onClick: composeHandler(composeEventHandlers(onClick, onClickCb)),
-    onDragEnter: composeDragHandler(composeEventHandlers(onDragEnter, onDragEnterCb)),
-    onDragOver: composeDragHandler(composeEventHandlers(onDragOver, onDragOverCb)),
-    onDragLeave: composeDragHandler(composeEventHandlers(onDragLeave, onDragLeaveCb)),
+    onDragenter: composeDragHandler(composeEventHandlers(onDragEnter, onDragenter, onDragEnterCb)),
+    onDragover: composeDragHandler(composeEventHandlers(onDragOver, onDragover, onDragOverCb)),
+    onDragleave: composeDragHandler(composeEventHandlers(onDragLeave, onDragleave, onDragLeaveCb)),
     onDrop: composeDragHandler(composeEventHandlers(onDrop, onDropCb)),
     ref: rootRef,
     ...(!optionsRef.value.disabled && !optionsRef.value.noKeyboard ? { tabIndex: 0 } : {}),
