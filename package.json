@@ -1,6 +1,6 @@
 {
   "name": "vue3-dropzone",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "dist/index.common.js",
   "unpkg": "dist/index.umd.js",
