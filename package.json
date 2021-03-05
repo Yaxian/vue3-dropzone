@@ -10,7 +10,7 @@
     "build:cjs": "BUILD_FORMAT=cjs rollup --config rollup.config.js",
     "build:umd": "BUILD_FORMAT=umd rollup --config rollup.config.js",
     "test": "jest",
-    "release": "np"
+    "release": "npm run build && np"
   },
   "repository": {
     "type": "git",
