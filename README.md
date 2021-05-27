@@ -18,7 +18,7 @@ yarn dev
 
 # How to use
 
-Basic use with flexibility. `acceptFiles` is an array returned as the same format as [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) where all the dropped files are turned into a [File class](https://developer.mozilla.org/en-US/docs/Web/API/File) before saving to the array.
+Basic use with flexibility. `acceptFiles` is an array returned in the same format as [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) where all the dropped files are turned into a [File class](https://developer.mozilla.org/en-US/docs/Web/API/File) before saving to the array.
 <br>
 <br>
 
@@ -36,6 +36,7 @@ Basic use with flexibility. `acceptFiles` is an array returned as the same forma
 
 <script>
 import { useDropzone } from "vue3-dropzone";
+
 export default {
   name: "UseDropzoneDemo",
   setup() {
@@ -79,6 +80,8 @@ Save multiple files through [axios requests](https://github.com/axios/axios) and
 
 <script>
 import { useDropzone } from "vue3-dropzone";
+import axios from "axios";
+
 export default {
   name: "UseDropzoneDemo",
   setup() {
