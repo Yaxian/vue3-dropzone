@@ -125,3 +125,79 @@ export default {
 };
 </script>
 ```
+
+
+
+<br>
+<br>
+
+# Recive file data & save as vue variable
+
+Recive file data and use the data in the template, example is with CSV.
+<br>
+<br>
+
+
+```vue
+<template>
+  <div>
+    <div v-bind="getRootProps()">
+      <input v-bind="getInputProps()" />
+      <p v-if="isDragActive">Drop the files here ...</p>
+      <p v-else>Drag 'n' drop some files here, or click to select files</p>
+    </div>
+    <button @click="open">open</button>
+  </div>
+</template>
+
+<script>
+import { useDropzone } from "vue3-dropzone";
+import axios from "axios";
+
+export default {
+  name: "UseDropzoneDemo",
+  data() {
+      let state = this;
+      const { getRootProps, getInputProps } = useDropzone({
+          onDrop,
+      });
+      function onDrop(acceptFiles, rejectReasons) {
+          console.log(acceptFiles);
+          console.log(rejectReasons);
+          state.saveFiles(acceptFiles);
+      }
+      return {
+          data: [],
+          getRootProps,
+          getInputProps,
+      };
+  },
+  methods() {
+    saveFiles(files){
+      const url = "{your_url}"; // Your url on the server side
+      const formData = new FormData(); // pass data as a form
+      for (var x = 0; x < files.length; x++) {
+        // append files as array to the form, feel free to change the array name
+        formData.append("images[]", files[x]);
+      }
+
+      // post the formData to your backend where storage is processed. In the backend, you will need to loop through the array and save each file through the loop.
+
+      axios
+        .post(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.info(response.data);
+          this.data = response.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
+};
+</script>
+```
