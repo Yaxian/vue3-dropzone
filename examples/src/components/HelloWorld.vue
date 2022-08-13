@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-bind="getRootProps()">
-      <input v-bind="getInputProps()" >
+      <input v-bind="getInputProps()">
       <p v-if="isDragActive">Drop the files here ...</p>
       <p v-else>Drag 'n' drop some files here, or click to select files</p>
       <div v-if="isFocused" id="focus">
@@ -11,51 +11,34 @@
         isDragReject: {{ isDragReject }}
       </div>
     </div>
-    <button @click="onClick">open</button>
+    <button @click="open">open</button>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
+<script lang="ts" setup>
+import { reactive } from 'vue'
 import { useDropzone } from 'vue3-dropzone/src'
-export default defineComponent({
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  methods: {
-    onClick() {
-      if (this.open) {
-        this.open()
-      }
-    },
-    toggleMulti() {
-      this.options.multiple = !this.options.multiple
-    }
-  },
-  setup() {
-    function onDrop(acceptedFiles, rejectReasons) {
-      console.log('acceptedFiles', acceptedFiles)
-      console.log('rejectReasons', rejectReasons)
-    }
+import type { FileRejectReason } from 'vue3-dropzone/src/useDropzone'
 
-    const options = reactive({
-      multiple: false,
-      onDrop,
-      accept: '.jpg',
-    })
+function onDrop(acceptedFiles: File[], rejectReasons: FileRejectReason[]) {
+  console.log('acceptedFiles', acceptedFiles)
+  console.log('rejectReasons', rejectReasons)
+}
 
-    const {
-      getRootProps,
-      getInputProps,
-      ...rest
-    } = useDropzone(options)
-    return {
-      options,
-      getRootProps,
-      getInputProps,
-      ...rest
-    }
-  }
+const options = reactive({
+  multiple: false,
+  onDrop,
+  accept: '.jpg',
 })
+
+const {
+  getRootProps,
+  getInputProps,
+  isDragActive,
+  isFocused,
+  isDragReject,
+  open
+} = useDropzone(options)
+
+
 </script>

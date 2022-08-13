@@ -16,7 +16,7 @@ type FileRejectionError = { code: FileErrorCode, message: string } | null | bool
 
 type InputFile = (FileWithPath | DataTransferItem) & { size?: number }
 
-type FileRejectReason = { file: InputFile; errors: FileRejectionError[] }
+export type FileRejectReason = { file: InputFile; errors: FileRejectionError[] }
 
 export interface FileUploadOptions {
   accept: FileAccept
@@ -29,7 +29,7 @@ export interface FileUploadOptions {
   onDragEnter: FileHandler
   onDragLeave: FileHandler
   onDragOver: FileHandler
-  onDrop: (acceptedFiles: InputFile[], rejectReasons: FileRejectReason[], event: Event) => void
+  onDrop: (acceptedFiles: any[], rejectReasons: FileRejectReason[], event: Event) => void
   onDropAccepted: (acceptedFiles: InputFile[], event: Event) => void
   onDropRejected: (rejectReasons: FileRejectReason[], event: Event) => void
   onFileDialogCancel: () => void
@@ -527,11 +527,11 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     dispatch({ type: 'reset' })
   }
 
-  const composeHandler = (fn: ComposeFunction) => (optionsRef.value.disabled ? null : fn)
+  const composeHandler = (fn: ComposeFunction) => (optionsRef.value.disabled ? undefined : fn)
 
-  const composeKeyboardHandler = (fn: ComposeFunction) => (optionsRef.value.noKeyboard ? null : composeHandler(fn))
+  const composeKeyboardHandler = (fn: ComposeFunction) => (optionsRef.value.noKeyboard ? undefined : composeHandler(fn))
 
-  const composeDragHandler = (fn: ComposeFunction) => (optionsRef.value.noDrag ? null : composeHandler(fn))
+  const composeDragHandler = (fn: ComposeFunction) => (optionsRef.value.noDrag ? undefined : composeHandler(fn))
 
   const getRootProps = ({
     onKeyDown,
@@ -572,7 +572,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     ...rest
   }: { onChange?: () => void; onClick?: () => void } = {}) {
     const inputProps = {
-      accept: optionsRef.value.accept,
+      accept: optionsRef.value.accept as string,
       multiple: optionsRef.value.multiple,
       style: 'display: none',
       type: 'file',
