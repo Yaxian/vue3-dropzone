@@ -13,7 +13,7 @@ type FileErrorCode = 'file-invalid-type' | 'file-too-large' | 'file-too-small' |
 
 type FileRejectionError = { code: FileErrorCode, message: string } | null | boolean
 
-type InputFile = (FileWithPath | DataTransferItem) & { size?: number }
+export type InputFile = (FileWithPath | DataTransferItem) & { size?: number }
 
 export type FileRejectReason = { file: InputFile; errors: FileRejectionError[] }
 
