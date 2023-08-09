@@ -1,5 +1,4 @@
 import typescript from 'rollup-plugin-typescript2';
-import { terser } from 'rollup-plugin-terser';
 
 const format = process.env.BUILD_FORMAT;
 
@@ -9,6 +8,8 @@ const fileName = ((format) => {
       return 'index.common.js';
     case 'umd':
       return 'index.umd.js';
+    case 'esm':
+      return 'index.esm.js';
   }
 })(format);
 
@@ -23,11 +24,6 @@ export default {
   plugins: [
     typescript({
       tsconfig: 'tsconfig.build.json',
-    }),
-    terser({
-      format: {
-        comments: false,
-      },
     }),
   ],
 };

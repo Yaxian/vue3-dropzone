@@ -90,7 +90,7 @@ describe('useFileUpload() hook', () => {
       expect(input).toHaveAttribute('multiple', '')
     })
 
-    test('updates {accept, multiple} on when it changes', () => {
+    test('updates {accept, multiple} on when it changes', async () => {
       const accept = 'image/jpeg'
       const options = reactive({ multiple: true, accept })
       const TestCmp = createTestComponent(options)
@@ -101,7 +101,7 @@ describe('useFileUpload() hook', () => {
 
       options.accept = 'image/png'
       options.multiple = false
-      rerender({})
+      await rerender({})
       input = container.querySelector('input')
       expect(input).toHaveAttribute('accept', 'image/png')
       expect(input).not.toHaveAttribute('multiple')
@@ -142,7 +142,7 @@ describe('useFileUpload() hook', () => {
 
       const rootProps = {
         onClick: jest.fn(),
-        onKeyDown: jest.fn(),
+        onKeydown: jest.fn(),
         onFocus: jest.fn(),
         onBlur: jest.fn(),
         onDragenter: jest.fn(),
@@ -164,7 +164,7 @@ describe('useFileUpload() hook', () => {
       fireEvent.focus(dropzone)
       fireEvent.keyDown(dropzone)
       expect(rootProps.onFocus).toHaveBeenCalled()
-      expect(rootProps.onKeyDown).toHaveBeenCalled()
+      expect(rootProps.onKeydown).toHaveBeenCalled()
 
       fireEvent.blur(dropzone)
       expect(rootProps.onBlur).toHaveBeenCalled()

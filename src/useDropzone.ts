@@ -1,11 +1,10 @@
 import {
   ref, watch, computed, toRefs,
   onMounted, onUnmounted, RendererElement,
+  reactive,
 } from 'vue'
 import { fromEvent, FileWithPath } from 'file-selector'
 import accepts from 'attr-accept'
-
-import { useReducer, ReducerState } from './useReducer'
 
 type FileAccept = string | string[]
 type FileHandler = (evt: Event) => void
@@ -14,7 +13,7 @@ type FileErrorCode = 'file-invalid-type' | 'file-too-large' | 'file-too-small' |
 
 type FileRejectionError = { code: FileErrorCode, message: string } | null | boolean
 
-type InputFile = (FileWithPath | DataTransferItem) & { size?: number }
+export type InputFile = (FileWithPath | DataTransferItem) & { size?: number }
 
 export type FileRejectReason = { file: InputFile; errors: FileRejectionError[] }
 
@@ -40,7 +39,7 @@ export interface FileUploadOptions {
   noDragEventsBubbling: boolean
 }
 
-interface UserFileUploadInitState extends ReducerState {
+interface UserFileUploadInitState {
   isFocused: boolean
   isFileDialogActive: boolean
   isDragAccept: boolean
@@ -196,57 +195,6 @@ const defaultProps: Partial<FileUploadOptions> = {
   noDragEventsBubbling: false,
 }
 
-function reducer(state: UserFileUploadInitState, action: any) {
-  /* istanbul ignore next */
-  switch (action.type) {
-    case 'focus':
-      return {
-        ...state,
-        isFocused: true,
-      }
-    case 'blur':
-      return {
-        ...state,
-        isFocused: false,
-      }
-    case 'openDialog':
-      return {
-        ...state,
-        isFileDialogActive: true,
-      }
-    case 'closeDialog':
-      return {
-        ...state,
-        isFileDialogActive: false,
-      }
-    case 'setDraggedFiles':
-      /* eslint no-case-declarations: 0 */
-      const { isDragActive, draggedFiles } = action
-      return {
-        ...state,
-        draggedFiles,
-        isDragActive,
-      }
-    case 'setFiles':
-      return {
-        ...state,
-        acceptedFiles: action.acceptedFiles,
-        fileRejections: action.fileRejections,
-      }
-    case 'reset':
-      return {
-        ...state,
-        isFileDialogActive: false,
-        isDragActive: false,
-        draggedFiles: [],
-        acceptedFiles: [],
-        fileRejections: [],
-      }
-    default:
-      return state
-  }
-}
-
 export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   const optionsRef = ref({
     ...defaultProps,
@@ -260,7 +208,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   const rootRef = ref<RendererElement>()
   const inputRef = ref<RendererElement>()
 
-  const [state, dispatch] = useReducer(reducer, {
+  const state = reactive<UserFileUploadInitState>({
     isFocused: false,
     isFileDialogActive: false,
     isDragActive: false,
@@ -270,9 +218,10 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     acceptedFiles: [],
     fileRejections: [],
   })
+
   const openFileDialog = () => {
     if (inputRef.value) {
-      dispatch({ type: 'openDialog' })
+      state.isFileDialogActive = true
       inputRef.value.value = ''
       inputRef.value.click()
     }
@@ -287,7 +236,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
           const { files } = inputRef.value
 
           if (files && !files.length) {
-            dispatch({ type: 'closeDialog' })
+            state.isFileDialogActive = false
             if (typeof onFileDialogCancel === 'function') {
               onFileDialogCancel()
             }
@@ -313,11 +262,11 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   }
 
   function onFocusCb() {
-    dispatch({ type: 'focus' })
+    state.isFocused = true
   }
 
   function onBlurCb() {
-    dispatch({ type: 'blur' })
+    state.isFocused = false
   }
 
   function onClickCb() {
@@ -392,11 +341,8 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
         return
       }
 
-      dispatch({
-        draggedFiles: draggedFilesRes,
-        isDragActive: true,
-        type: 'setDraggedFiles',
-      })
+      state.draggedFiles = draggedFilesRes
+      state.isDragActive = true
 
       if (onDragEnter) {
         onDragEnter(event)
@@ -450,11 +396,8 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
       return
     }
 
-    dispatch({
-      isDragActive: false,
-      type: 'setDraggedFiles',
-      draggedFiles: [],
-    })
+    state.draggedFiles = []
+    state.isDragActive = false
 
     const { onDragLeave } = optionsRef.value
     if (isEvtWithFiles(event) && onDragLeave) {
@@ -505,11 +448,8 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
           acceptedFiles.splice(0)
         }
 
-        dispatch({
-          acceptedFiles,
-          fileRejections,
-          type: 'setFiles',
-        })
+        state.acceptedFiles = acceptedFiles
+        state.fileRejections = fileRejections
 
         if (onDrop) {
           onDrop(acceptedFiles, fileRejections, event)
@@ -524,7 +464,12 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
         }
       })
     }
-    dispatch({ type: 'reset' })
+
+    state.isFileDialogActive = false
+    state.isDragActive = false
+    state.draggedFiles = []
+    state.acceptedFiles = []
+    state.fileRejections = []
   }
 
   const composeHandler = (fn: ComposeFunction) => (optionsRef.value.disabled ? undefined : fn)
@@ -534,7 +479,6 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   const composeDragHandler = (fn: ComposeFunction) => (optionsRef.value.noDrag ? undefined : composeHandler(fn))
 
   const getRootProps = ({
-    onKeyDown,
     onFocus,
     onBlur,
     onClick,
@@ -549,7 +493,6 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   }: {
     [key: string] : any
   } = {}) => ({
-    onKeyDown: composeKeyboardHandler(composeEventHandlers(onKeyDown, onKeyDownCb)),
     onFocus: composeKeyboardHandler(composeEventHandlers(onFocus, onFocusCb)),
     onBlur: composeKeyboardHandler(composeEventHandlers(onBlur, onBlurCb)),
     onClick: composeHandler(composeEventHandlers(onClick, onClickCb)),
