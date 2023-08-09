@@ -5,10 +5,16 @@
   "main": "dist/index.common.js",
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    "require": "./dist/index.common.js",
+    "import": "./dist/index.esm.js"
+  },
   "scripts": {
-    "build": "npm run build:cjs && npm run build:umd",
+    "build": "npm run build:cjs && npm run build:umd && npm run build:esm",
     "build:cjs": "BUILD_FORMAT=cjs rollup --config rollup.config.js",
     "build:umd": "BUILD_FORMAT=umd rollup --config rollup.config.js",
+    "build:esm": "BUILD_FORMAT=esm rollup --config rollup.config.js",
     "test": "jest",
     "release": "npm run build && np"
   },

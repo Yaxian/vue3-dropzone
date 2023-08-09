@@ -1,6 +1,6 @@
 import {
   ref, watch, computed, toRefs,
-  onMounted, onUnmounted, type RendererElement,
+  onMounted, onUnmounted, RendererElement,
   reactive,
 } from 'vue'
 import { fromEvent, FileWithPath } from 'file-selector'
@@ -479,7 +479,6 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   const composeDragHandler = (fn: ComposeFunction) => (optionsRef.value.noDrag ? undefined : composeHandler(fn))
 
   const getRootProps = ({
-    onKeyDown,
     onFocus,
     onBlur,
     onClick,
@@ -494,7 +493,6 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
   }: {
     [key: string] : any
   } = {}) => ({
-    onKeyDown: composeKeyboardHandler(composeEventHandlers(onKeyDown, onKeyDownCb)),
     onFocus: composeKeyboardHandler(composeEventHandlers(onFocus, onFocusCb)),
     onBlur: composeKeyboardHandler(composeEventHandlers(onBlur, onBlurCb)),
     onClick: composeHandler(composeEventHandlers(onClick, onClickCb)),

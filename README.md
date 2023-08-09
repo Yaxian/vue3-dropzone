@@ -133,18 +133,15 @@ const result = useDropzone(options)
 | property | type | description |
 |----------|------|-------------|
 | onDrop | Function | Cb for when the drop event occurs. Note that this callback is invoked after the getFilesFromEvent callback is done. |
-| accept | String / Array<*String>  | Set accepted file types. See https://github.com/okonet/attr-accept for more information. |
+| accept | String / Array<*String*>  | Set accepted file types. See https://github.com/okonet/attr-accept for more information. |
 | disabled | Boolean | Enable/disable the dropzone |
 | maxSize | Number | Maximum file size (in bytes) |
 | minSize | Number | Minimum file size (in bytes) |
 | multiple | Number | Allow of multiple files |
 | maxFiles | Number | Maximum accepted number of files The default value is 0 which means there is no limitation to how many files are accepted |
 | getFilesFromEvent | Function | Use this to provide a custom file aggregator |
-| onDragEnter | Function | Cb for when the dragenter event occurs. |
 | onDragenter | Function | Cb for when the dragenter event occurs. |
-| onDragOver | Function | Cb for when the dragover event occurs |
 | onDragover | Function | Cb for when the dragover event occurs |
-| onDragLeave | Function | Cb for when the dragleave event occurs |
 | onDragleave | Function | Cb for when the dragleave event occurs |
 | onDropAccepted | Function | Cb for when the drop event occurs. Note that if no files are accepted, this callback is not invoked. |
 | onDropRejected | Function | Cb for when the drop event occurs. Note that if no files are rejected, this callback is not invoked. |
@@ -169,8 +166,8 @@ const result = useDropzone(options)
 | fileRejections | Ref<*Array*> | files rejections |
 | getRootProps | Function | Function to generate element props which contains input |
 | getInputProps | Function | Function to generate input props |
-| rootRef | Ref<*HTMLElement> | ref a dom element |
-| inputRef | Ref<*HTMLElement> | ref a input element |
+| rootRef | Ref<*HTMLElement*> | ref a dom element |
+| inputRef | Ref<*HTMLElement*> | ref a input element |
 | open | Function | Open file selection dialog |
 
 ### Run example

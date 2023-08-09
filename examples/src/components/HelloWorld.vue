@@ -17,8 +17,8 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { useDropzone } from 'vue3-dropzone/src'
-import type { FileRejectReason } from 'vue3-dropzone/src/useDropzone'
+import { useDropzone } from 'vue3-dropzone'
+import type { FileRejectReason } from 'vue3-dropzone'
 
 function onDrop(acceptedFiles: File[], rejectReasons: FileRejectReason[]) {
   console.log('acceptedFiles', acceptedFiles)
