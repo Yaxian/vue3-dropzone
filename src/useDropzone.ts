@@ -6,6 +6,8 @@ import {
 import { fromEvent, FileWithPath } from 'file-selector'
 import accepts from 'attr-accept'
 
+const filesizeBase = 1000;
+
 type FileAccept = string | string[]
 type FileHandler = (evt: Event) => void
 
@@ -134,22 +136,23 @@ export function fileAccepted(file: InputFile, accept: FileAccept): [boolean, nul
 
 export const getTooLargeRejectionErr = (maxSize: number): FileRejectionError => ({
   code: FILE_TOO_LARGE,
-  message: `File is larger than ${maxSize} bytes`,
+  message: `File is larger than ${maxSize} MB`,
 })
 
 export const getTooSmallRejectionErr = (minSize: number): FileRejectionError => ({
   code: FILE_TOO_SMALL,
-  message: `File is smaller than ${minSize} bytes`,
+  message: `File is smaller than ${minSize} MB`,
 })
 
 export function fileMatchSize(file: InputFile, minSize: number, maxSize: number) {
   if (isDefined(file.size) && file.size) {
+    const fileMb = file.size / Math.pow(filesizeBase, 2);
     if (isDefined(minSize) && isDefined(maxSize)) {
-      if (file.size > maxSize) return [false, getTooLargeRejectionErr(maxSize)]
-      if (file.size < minSize) return [false, getTooSmallRejectionErr(minSize)]
-    } else if (isDefined(minSize) && file.size < minSize) {
+      if (fileMb > maxSize) return [false, getTooLargeRejectionErr(maxSize)]
+      if (fileMb < minSize) return [false, getTooSmallRejectionErr(minSize)]
+    } else if (isDefined(minSize) && fileMb < minSize) {
       return [false, getTooSmallRejectionErr(minSize)]
-    } else if (isDefined(maxSize) && file.size > maxSize) {
+    } else if (isDefined(maxSize) && fileMb > maxSize) {
       return [false, getTooLargeRejectionErr(maxSize)]
     }
   }
