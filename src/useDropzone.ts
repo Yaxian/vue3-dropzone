@@ -125,10 +125,19 @@ function isDefined(value: any) {
   return value !== undefined && value !== null
 }
 
+
+/**
+ * fix: attr-accept is not a function
+ * @issue #21, #25
+*/
+// @ts-ignore
+const acceptsDefault = accepts.default
+const acceptsFn: typeof accepts = acceptsDefault || accepts
+
 // Firefox versions prior to 53 return a bogus MIME type for every file drag, so dragovers with
 // that MIME type will always be accepted
 export function fileAccepted(file: InputFile, accept: FileAccept): [boolean, null | FileRejectionError] {
-  const isAcceptable = file.type === 'application/x-moz-file' || accepts(file, accept)
+  const isAcceptable = file.type === 'application/x-moz-file' || acceptsFn(file, accept)
   return [isAcceptable, isAcceptable ? null : getInvalidTypeRejectionErr(accept)]
 }
 
