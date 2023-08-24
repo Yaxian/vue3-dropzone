@@ -122,6 +122,14 @@ export default {
 </script>
 ```
 
+## ☕️
+Could you buy me a coffee, if my effort save your time?
+
+| 微信(Wechat) | 支付宝(alipay) |
+| --- | --- |
+| <img src="./docs/buy_coffee_wechat.jpg" width="150px" height="150px" > | <img src="./docs/buy_coffee_alipay.jpg"  width="150px" height="150px" > |
+
+
 ### API
 
 ```js
@@ -178,9 +186,3 @@ yarn install
 yarn dev
 ```
 
-## ☕️
-Could you buy me a coffee, if my effort save your time?
-
-| 微信(Wechat) | 支付宝(alipay) |
-| --- | --- |
-| <img src="./docs/buy_coffee_wechat.jpg" width="100px" height="100px" > | <img src="./docs/buy_coffee_alipay.jpg"  width="100px" height="100px" > |
