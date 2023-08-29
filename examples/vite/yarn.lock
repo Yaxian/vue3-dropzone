@@ -428,8 +428,8 @@ vite@^2.0.4:
   optionalDependencies:
     fsevents "~2.3.1"
 
-"vue3-dropzone@file:..":
-  version "0.0.5"
+"vue3-dropzone@file:../..":
+  version "2.1.1"
   dependencies:
     attr-accept "^2.2.2"
     file-selector "^0.2.4"
