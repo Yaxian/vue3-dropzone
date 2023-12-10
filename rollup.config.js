@@ -1,4 +1,4 @@
-import typescript from 'rollup-plugin-typescript2';
+const typescript = require('rollup-plugin-typescript2')
 
 const format = process.env.BUILD_FORMAT;
 
@@ -13,7 +13,10 @@ const fileName = ((format) => {
   }
 })(format);
 
-export default {
+/**
+ * @type {import('rollup').RollupOptions}
+*/
+module.exports = {
   input: './src/index.ts',
   output: {
     name: `bundle.${format}.js`,

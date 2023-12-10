@@ -47,11 +47,11 @@
     "jest-serializer-vue": "^2.0.2",
     "jest-watch-typeahead": "^0.6.1",
     "np": "^7.4.0",
-    "rollup": "^2.40.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup": "^4.7.0",
+    "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^26.5.2",
-    "typescript": "^4.2.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3",
     "vue": "^3.0.4"
   },
   "dependencies": {

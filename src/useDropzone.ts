@@ -290,7 +290,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     }
   }
 
-  const dragTargetsRef = ref<any>([])
+  const dragTargetsRef = ref<any[]>([])
   const onDocumentDrop = (event: Event) => {
     if (!rootRef.value) {
       return
@@ -419,7 +419,7 @@ export function useDropzone(options: Partial<FileUploadOptions> = {}) {
     // Persist here because we need the event later after getFilesFromEvent() is done
     stopPropagation(event)
 
-    dragTargetsRef.value = []
+    dragTargetsRef.value = [] as any[]
 
     const {
       getFilesFromEvent, noDragEventsBubbling,
