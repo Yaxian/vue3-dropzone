@@ -16,7 +16,7 @@
     "build:umd": "BUILD_FORMAT=umd rollup --config rollup.config.js",
     "build:esm": "BUILD_FORMAT=esm rollup --config rollup.config.js",
     "test": "jest",
-    "release": "npm run build && np"
+    "release": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,6 @@
     "jest": "^26.6.3",
     "jest-serializer-vue": "^2.0.2",
     "jest-watch-typeahead": "^0.6.1",
-    "np": "^7.4.0",
     "rollup": "^4.7.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^26.5.2",
