@@ -8,7 +8,7 @@
   "exports": {
     "require": "./dist/index.common.js",
     "import": "./dist/index.esm.js",
-    "types": "./dist/types/index.d.ts"
+    "types": "./dist/index.d.ts"
   },
   "scripts": {
     "build": "npm run build:cjs && npm run build:umd && npm run build:esm",
